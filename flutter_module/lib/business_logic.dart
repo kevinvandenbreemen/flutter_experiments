@@ -43,7 +43,7 @@ class _GalleryChooserState extends State<GalleryChooser> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: new EdgeInsets.all(32.0),
+      padding: new EdgeInsets.all(2.0),
       child: new Column(
         children: <Widget>[
           new Text("Child List Goeth Here"),
@@ -52,15 +52,26 @@ class _GalleryChooserState extends State<GalleryChooser> {
               itemBuilder: (context, index){
                 GalleryItem item = imageUrls[index];
                 return new Container(
-                  height: 120.0,
+                  height: 300.0,
+                  width: 300.0,
                   margin: new EdgeInsets.symmetric(
-                    vertical: 16.0,
-                    horizontal: 24.0
+                    vertical: 2.0,
+                    horizontal: 2.0
                   ),
                   child: new Column(
                     children: <Widget>[
-                      new Text(item.description),
-                      Expanded(child:Image.network(item.url))
+                      Expanded(child:Image.network(item.url)),
+                      new Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          new Text(
+                            item.description,
+                            style: new TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white
+                            ),
+                          )
+                        ],),
                     ],
                   ),
                 );
