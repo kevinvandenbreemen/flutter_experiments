@@ -47,7 +47,7 @@ class FlutterIntegration : AppCompatActivity() {
         messageChannel = BasicMessageChannel(flutterView, CHANNEL, StringCodec.INSTANCE)
         messageChannel.setMessageHandler(BasicMessageChannel.MessageHandler { incoming, reply ->
             Toast.makeText(this, incoming, Toast.LENGTH_LONG).show()
-            reply.reply("MSG RECEIVED") //  Why doesn't this count as a message going to the channel??
+            reply.reply("MSG RECEIVED") //  The reply function sends a message that can be picked up by an optional future on Flutter's side
             messageChannel.send("RECEIVED - SENT VIA send()")
         })
     }

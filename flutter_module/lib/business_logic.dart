@@ -57,7 +57,9 @@ class _GalleryChooserState extends State<GalleryChooser> {
 
   void _playVideo(GalleryItem item){
     print("Sending Message to Android App");
-    gemini.send(item.description);
+    gemini.send(item.description).then((response){
+      print("Received Reply:  $response");
+    });
 
   }
 
