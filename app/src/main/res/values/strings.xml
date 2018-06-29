@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="flutter_engaged">FLUTTER ON</string>
+    <string name="flutter_disengaged">FLUTTER OFF</string>
+    <string name="flutter_control">FLUTTER TOGGLE</string>
 </resources>
