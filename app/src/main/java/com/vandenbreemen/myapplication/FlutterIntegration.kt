@@ -3,7 +3,10 @@ package com.vandenbreemen.myapplication
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Switch
+import com.vandenbreemen.myapplication.R.id.flutterContainer
+import io.flutter.facade.Flutter
 
 class FlutterIntegration : AppCompatActivity() {
 
@@ -23,10 +26,11 @@ class FlutterIntegration : AppCompatActivity() {
     }
 
     private fun disengageFlutter() {
-        println("Disengage")
+        findViewById<ViewGroup>(flutterContainer).removeAllViews()
     }
 
     private fun engageFlutter() {
-        println("Engage")
+        val flutterView = Flutter.createView(this, lifecycle,"route1")
+        findViewById<ViewGroup>(flutterContainer).addView(flutterView)
     }
 }
