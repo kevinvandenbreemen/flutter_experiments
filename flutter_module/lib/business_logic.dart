@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 
 class GalleryChooser extends StatefulWidget {
   @override
@@ -16,6 +18,9 @@ class GalleryItem{
 
 
 class _GalleryChooserState extends State<GalleryChooser> {
+
+  static const String CHANNEL = "gemini";
+  static const BasicMessageChannel<String> gemini = const BasicMessageChannel(CHANNEL, StringCodec());
 
   List<GalleryItem> imageUrls = new List<GalleryItem>();
 
@@ -41,7 +46,8 @@ class _GalleryChooserState extends State<GalleryChooser> {
   }
 
   void _playVideo(GalleryItem item){
-
+    print("Sending Channel Message");
+    gemini.send(item.description);
   }
 
   @override

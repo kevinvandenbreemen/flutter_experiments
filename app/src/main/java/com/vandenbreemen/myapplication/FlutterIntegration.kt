@@ -5,10 +5,19 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
+import android.widget.Toast
 import com.vandenbreemen.myapplication.R.id.flutterContainer
 import io.flutter.facade.Flutter
+import io.flutter.plugin.common.BasicMessageChannel
+import io.flutter.plugin.common.StringCodec
 
 class FlutterIntegration : AppCompatActivity() {
+
+    companion object {
+        const val CHANNEL = "gemini"
+    }
+
+    lateinit var messageChannel:BasicMessageChannel<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +32,8 @@ class FlutterIntegration : AppCompatActivity() {
                 disengageFlutter()
             }
         })
+
+
     }
 
     private fun disengageFlutter() {
@@ -32,5 +43,10 @@ class FlutterIntegration : AppCompatActivity() {
     private fun engageFlutter() {
         val flutterView = Flutter.createView(this, lifecycle,"route1")
         findViewById<ViewGroup>(flutterContainer).addView(flutterView)
+
+        messageChannel = BasicMessageChannel(flutterView, CHANNEL, StringCodec.INSTANCE)
+        messageChannel.setMessageHandler(BasicMessageChannel.MessageHandler { incoming, reply ->
+            Toast.makeText(this, incoming, Toast.LENGTH_LONG).show()
+        })
     }
 }
