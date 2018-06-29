@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 
 class GalleryChooser extends StatefulWidget {
   @override
@@ -21,6 +22,14 @@ class _GalleryChooserState extends State<GalleryChooser> {
 
   static const String CHANNEL = "gemini";
   static const BasicMessageChannel<String> gemini = const BasicMessageChannel(CHANNEL, StringCodec());
+
+  int _contactCount = 0;
+
+  Future<String> _handler(String message) async{
+    print("Received Message from Android App:  ${message}");
+    setState(()=>_contactCount++);
+    return "";
+  }
 
   List<GalleryItem> imageUrls = new List<GalleryItem>();
 
@@ -43,11 +52,13 @@ class _GalleryChooserState extends State<GalleryChooser> {
         "Sunset"
     ));
 
+    gemini.setMessageHandler(_handler);
   }
 
   void _playVideo(GalleryItem item){
-    print("Sending Channel Message");
+    print("Sending Message to Android App");
     gemini.send(item.description);
+
   }
 
   @override
@@ -56,7 +67,7 @@ class _GalleryChooserState extends State<GalleryChooser> {
       padding: new EdgeInsets.all(2.0),
       child: new Column(
         children: <Widget>[
-          new Text("Child List Goeth Here"),
+          new Text("Signals From Android App:  $_contactCount"),
           new Expanded(
               child: new ListView.builder(
               itemBuilder: (context, index){
