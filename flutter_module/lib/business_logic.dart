@@ -26,8 +26,12 @@ class _GalleryChooserState extends State<GalleryChooser> {
       "Typewriter"
     ));
     imageUrls.add(GalleryItem(
-        "https://images.pexels.com/photos/730896/pexels-photo-730896.jpeg",
-        "Cat"
+        "https://cdn.pixabay.com/photo/2015/03/16/10/59/sunset-675847_960_720.jpg",
+        "Pirate Ship"
+    ));
+    imageUrls.add(GalleryItem(
+      "https://cdn.pixabay.com/photo/2018/06/24/03/06/ship-3493887_960_720.jpg",
+      "Boat"
     ));
     imageUrls.add(GalleryItem(
         "https://images.pexels.com/photos/1024994/pexels-photo-1024994.jpeg",
@@ -63,7 +67,9 @@ class _GalleryChooserState extends State<GalleryChooser> {
                       ),
                       child: new Column(
                         children: <Widget>[
-                          Expanded(child:Image.network(item.url)),
+                          Expanded(child: Image.network(
+                            item.url
+                          )),
                           new Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
