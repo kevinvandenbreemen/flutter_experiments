@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 
+import 'business_logic.dart';
+
 Future<void> main() async {
   final PackageInfo packageInfo = await PackageInfo.fromPlatform();
   runApp(Directionality(textDirection: TextDirection.ltr, child: Router(packageInfo)));
@@ -20,8 +22,8 @@ class Router extends StatelessWidget {
     switch (route) {
       case 'route1':
         return Container(
-          child: Center(child: Text('Route 1\n${packageInfo.appName}')),
-          color: Colors.green,
+          child: new GalleryChooser(),
+          color: Colors.lightBlueAccent,
         );
       case 'route2':
         return Container(
